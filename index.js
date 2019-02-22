@@ -12,7 +12,7 @@ app.use(cors());
 var helmet = require("helmet");
 app.use(helmet());
 
-mongoose.connect("mongodb://localhost:27017/leboncoin-server", {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true
 });
 
