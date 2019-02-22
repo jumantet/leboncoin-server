@@ -26,4 +26,4 @@ const offerRoutes = require("./routes/offer");
 app.use(userRoutes);
 app.use(offerRoutes);
 
-app.listen(process.env.PORT || 3000, () => console.log("Server has started"));
+app.listen(process.env.PORT, () => console.log("Server has started"));
