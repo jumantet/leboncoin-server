@@ -70,7 +70,7 @@ router.get("/offer/with-count", async (req, res) => {
       }
     }
     const offers = await filtered;
-
+    console.log(offers);
     return res.json(offers);
   } catch (error) {
     return res.status(400).json({ error: error.message });
@@ -80,6 +80,7 @@ router.get("/offer/with-count", async (req, res) => {
 router.get("/offer/:id", async (req, res) => {
   try {
     const offer = await Offer.findOne({ _id: ObjectId(req.params.id) });
+    offer.populate("creator");
     if (offer) {
       return res.json(offer);
     } else {
