@@ -51,7 +51,7 @@ router.post("/user/log_in", async (req, res) => {
     const user = await User.findOne({ "account.email": req.body.email });
     const password = req.body.password;
     if (SHA256(password + user.salt).toString(encBase64) === user.password) {
-      return res.json({ message: "Connexion réussie" });
+      return res.json(user);
     } else {
       return res.status(400).json({ error: "La connexion a échoué" });
     }
