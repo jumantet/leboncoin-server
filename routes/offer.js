@@ -14,6 +14,7 @@ router.post(
   isAuthenticated,
   uploadPictures,
   async (req, res) => {
+    console.log("hello");
     try {
       const newOffer = new Offer({
         title: req.body.title,
@@ -98,4 +99,27 @@ router.get("/offer/:id", async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
+
+router.get("/myoffers", isAuthenticated, async (req, res) => {
+  try {
+    const offers = await Offer.find({ creator: ObjectId(req.user._id) });
+    res.json(offers);
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
+});
+
+//DELETE
+
+router.get("/myoffers/delete/:id", async (req, res) => {
+  try {
+    const offer = await Offer.findOneAndDelete({
+      _id: ObjectId(req.params.id)
+    });
+    res.json("Offer has been deleted");
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
 module.exports = router;
