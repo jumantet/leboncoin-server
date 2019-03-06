@@ -2,11 +2,7 @@ const cloudinary = require("cloudinary");
 
 const uid2 = require("uid2");
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET
-});
+cloudinary.config = process.env.CLOUDINARY_URL;
 
 const uploadPictures = (req, res, next) => {
   const pictures = [];
@@ -26,7 +22,7 @@ const uploadPictures = (req, res, next) => {
           console.log(error, result);
           // Si j'ai une erreur avec l'upload, je sors de ma route
           if (error) {
-            return res.status(500).json({ error });
+            return res.status(500).json({ error: error.message });
           }
           // Sinon, je push mon image dans le tableau
           pictures.push(result);
