@@ -2,7 +2,11 @@ const cloudinary = require("cloudinary");
 
 const uid2 = require("uid2");
 
-cloudinary.config = process.env.CLOUDINARY_URL;
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 const uploadPictures = (req, res, next) => {
   const pictures = [];
