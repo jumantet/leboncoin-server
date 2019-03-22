@@ -23,7 +23,9 @@ require("./models/user");
 //Import Routes
 const userRoutes = require("./routes/user");
 const offerRoutes = require("./routes/offer");
+const offerGenerateRoutes = require("./routes/generateOffer");
 app.use(userRoutes);
 app.use(offerRoutes);
+app.use(offerGenerateRoutes);
 
 app.listen(process.env.PORT, () => console.log("Server has started"));

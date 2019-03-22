@@ -2,6 +2,7 @@ const express = require("express");
 const Offer = require("../models/offer");
 const uploadPictures = require("../middlewares/uploadPictures");
 const faker = require("faker/locale/fr");
+const isAuthenticated = require("../middlewares/isAuthenticated");
 
 const router = express.Router();
 
