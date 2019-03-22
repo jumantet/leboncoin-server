@@ -22,15 +22,13 @@ router.post("/offer/generate", isAuthenticated, async (req, res) => {
       const offer = Offer.findOne({ title: newOffer.title });
       if (!offer) {
         await newOffer.save();
-        res.json({
-          newOffer
-        });
         i++;
       } else {
         i++;
       }
     }
-    return res.json({ message: "offers has been published" });
+    const offers = await Offer.find();
+    return res.json(offers);
   } catch (error) {
     return res.status(400).json({ error: error.message });
   }
